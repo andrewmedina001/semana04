@@ -1,6 +1,7 @@
 from flask import Flask
 from config import conexion
 from models.participante import Participante
+from flask_cors import CORS
 
 
 from controllers.participante import ParticipanteController
@@ -18,6 +19,7 @@ from flask_restful import Api
 load_dotenv()
 
 app = Flask(__name__)
+CORS(app)
 api=Api(app)
 # URI dialect://usuario:password@host:puerto/base_de_datos
 # La siguiente linea sirve para la conexion a la base de datos
