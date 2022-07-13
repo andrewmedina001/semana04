@@ -3,7 +3,8 @@ from sqlalchemy import Column, types
 
 
 class Participante(conexion.Model):
-    # ahora esta clase tendra un comportamiento en forma de una tabla en la bd (todos los atributos que declare que sea propios de la bd se creara como columnas)
+    # conexion.Model hace que --> ahora esta clase tendra un comportamiento en forma de una tabla en la bd 
+    # (todos los atributos que declare que sea propios de la bd se creara como columnas)
     # conexion.Column() === Column()
     # Documentacion > https://docs.sqlalchemy.org/en/14/core/metadata.html?highlight=column#sqlalchemy.schema.Column.__init__
     # si no se pone el parametro 'name' este sera el mismo que el nombre del atributo

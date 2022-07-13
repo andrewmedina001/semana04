@@ -1,4 +1,3 @@
-# lirberia de complemento a Flask 
 from flask_restful import Resource, request
 from config import conexion
 from models.participante import Participante
@@ -9,6 +8,9 @@ from dtos.participante_dto import ParticipanteResponseDTO, ParticipanteRequestDT
 class ParticipanteController(Resource):
     # esta clase se comportara como si fuede un controlador, es decir que si definimos un metodo llamado get
     def get(self):
+
+        # return { 'message':'Ingreso al get' }
+
         # SELECT * FROM PARTICIPANTES;
         # https://docs.sqlalchemy.org/en/14/orm/query.html
         # https://docs.sqlalchemy.org/en/14/orm/query.html#sqlalchemy.orm.Query.all
@@ -16,19 +18,19 @@ class ParticipanteController(Resource):
         # many = True > indico que estoy pasando una lista de instancias por lo que el DTO va a tener que iterar esa lista y transformarlas en un diccionario
         participantesSerializados = ParticipanteResponseDTO().dump(resultado, many=True)
         # me retornara una lista de instancias de la clase del modelo en la cual puedo acceder a cada una de ellas a sus atributos y metodos (si hubiesen)
-        print(resultado[0].zona)
-        participantes = []
+        # print(resultado[0].zona)
+        # participantes = []
 
-        for participante in resultado:
-            participantes.append({
-                'id': participante.id,
-                'nombre': participante.nombre
-                # ...
-            })
+        # for participante in resultado:
+        #     participantes.append({
+        #         'id': participante.id,
+        #         'nombre': participante.nombre
+        #         # ...
+        #     })
 
         return {
             'message': 'Ingreso al get',
-            'content': participantes,
+            # 'content': participantes,
             'content2': participantesSerializados
         }
 
