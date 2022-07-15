@@ -36,8 +36,16 @@ conexion.init_app(app)
 # conexion.create_all(app=app)
 
 
+@app.route('/',methods=['GET'])
+def inicio():
+    return {
+        'message':'Bienvenido a mi API de concierto'
+    }
+
 # Definicion de rutas usando Flask-Restful
 api.add_resource(ParticipanteController, '/participantes')
+
+
 
 
 if __name__ == '__main__':
