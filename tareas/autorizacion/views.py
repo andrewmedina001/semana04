@@ -10,3 +10,4 @@ from .models import Usuario
 class RegisterView(generics.CreateAPIView):
     queryset=Usuario.objects.all()
     serializer_class=RegisterSerializer
+    

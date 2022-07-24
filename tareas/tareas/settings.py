@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'drf_yasg', # Swagger / Documentation of backend
     'gestion',
     'rest_framework',
-    'autorizacion'
+    'autorizacion',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -57,6 +58,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware'
 ]
 
 ROOT_URLCONF = 'tareas.urls'
@@ -147,3 +150,7 @@ AUTH_USER_MODEL='autorizacion.Usuario'
 REST_FRAMEWORK={
     'DEFAULT_AUTHENTICATION_CLASSES':['rest_framework_simplejwt.authentication.JWTAuthentication',]
 }
+
+# Add cors necesary lines
+    # Permitiendo que se acceda desde cualquier origen
+CORS_ALLOW_ALL_ORIGINS=True
