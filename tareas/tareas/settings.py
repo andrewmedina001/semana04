@@ -58,8 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware'
+    'corsheaders.middleware.CorsMiddleware'
 ]
 
 ROOT_URLCONF = 'tareas.urls'
@@ -154,3 +153,9 @@ REST_FRAMEWORK={
 # Add cors necesary lines
     # Permitiendo que se acceda desde cualquier origen
 CORS_ALLOW_ALL_ORIGINS=True
+
+
+from datetime import timedelta
+SIMPLE_JWT={
+    'ACCESS_TOKEN_LIFETIME':timedelta(hours=1,minutes=10,seconds=5)
+}

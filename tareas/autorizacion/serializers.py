@@ -29,6 +29,7 @@ class RegisterSerializer(serializers.ModelSerializer):
             password=validated_data['password']
         )
 
+        # Hasheado de contraseña
         usuario.set_password(validated_data['password'])
         usuario.save()
 

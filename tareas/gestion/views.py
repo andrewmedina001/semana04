@@ -1,9 +1,12 @@
+from ast import Is
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.request import Request
 
 from rest_framework.generics import ListAPIView,ListCreateAPIView
 from .serializers import PruebaSerializer, TareaSerializer
+
+from rest_framework.permissions import IsAuthenticated
 
 from .models import Tarea
 
@@ -40,6 +43,9 @@ class TareasView(ListCreateAPIView):
     queryset=Tarea.objects.all()
     serializer_class=TareaSerializer
 
+    # 
+    permission_classes=[IsAuthenticated]
+
     def get(self,request):
         
         # manda a llamar a la ejecucion de nuestro queryset
@@ -53,8 +59,10 @@ class TareasView(ListCreateAPIView):
         })
     def post(self,request:Request):
         body=request.data
+        print(request.user)
         instanciaSerializador=self.serializer_class(data=body)
         validacion=instanciaSerializador.is_valid(raise_exception=True)
+        # Hola
         if validacion==True:
-            instanciaSerializador.save()
+            # instanciaSerializador.save()
             return Response(data=instanciaSerializador.data,status=201)
