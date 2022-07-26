@@ -1,4 +1,2 @@
+node_modules/
 .env
-entorno_django/
-envS4/
-tareas/
