@@ -46,10 +46,15 @@ class TareasView(ListCreateAPIView):
     # 
     permission_classes=[IsAuthenticated]
 
-    def get(self,request):
+    def get(self,request:Request):
         
         # manda a llamar a la ejecucion de nuestro queryset
-        tareas=self.get_queryset()
+            #retorna todas las tareas sin verificar si son de el 
+        # tareas=self.get_queryset() 
+        usuarioId=request.user.id
+
+        # Equivalent to SELECT * FROM tareas WHERE usuarioId = ... ;
+        tareas=Tarea.objects.filter(usuarioId=usuarioId).all()
 
         tareasSerielizadas=self.serializer_class(instance=tareas,many=True)
 
@@ -59,10 +64,13 @@ class TareasView(ListCreateAPIView):
         })
     def post(self,request:Request):
         body=request.data
-        print(request.user)
+        print(request.user.nombre)
+        # Modificando el body entrante y le agrego el ID del usuario que actualmente esta
+            # haciendo la peticion
+        body['usuarioId']=request.user.id
         instanciaSerializador=self.serializer_class(data=body)
         validacion=instanciaSerializador.is_valid(raise_exception=True)
         # Hola
         if validacion==True:
-            # instanciaSerializador.save()
+            instanciaSerializador.save()
             return Response(data=instanciaSerializador.data,status=201)
