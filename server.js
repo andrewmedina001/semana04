@@ -21,16 +21,61 @@ dotenv.config()
 //     // do something
 // }
 
-const PORT=process.env.PORT;
-// 
 const servidor=express()
+
+const PORT=process.env.PORT;
+
+servidor.use(express.json())
+// 
+
+
+const categories=[
+    {
+    name:'Zapatos',
+    descripcion:'zapatos para hombres, mujeres y niñas.'
+    },
+];
+
 
 
 servidor.get("/",(req,res)=>{
-    res.json({
-        message:"Hola"
+    res.status(200).json({
+        message:"Wecolme to my first API"
     });
 });
+
+servidor.route("/categories")
+    .get((req,res)=>{
+        return res.status(200).json({categories})  
+    })
+    .post((req,res)=>{
+        const category=req.body
+        categories.push(category)
+        return res.status(201).json({
+            'message':'Created Sucsessfully.',
+            'content':category
+        })
+    });
+
+servidor.route("/categories/:id")
+    .get((req,res)=>{
+        const{id}=req.params;
+        console.log(categories[id])
+        if(categories[id]!==undefined){
+            return res.json({
+                'message':"la respuesta es",
+                'content':categories[id]
+            })
+        }else{
+            return res.status(400).json({
+                'message':"la respuesta es",
+                'content':null
+            })
+        }
+        
+    })
+
+// Creacion de metodo
 
 // servidor.listen(port,function)
     // ()=> anonym function
